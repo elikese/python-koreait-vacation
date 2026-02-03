@@ -70,6 +70,3 @@ scores = {
 for name, score in scores.items():
     if score >= 60:
         print(f"{name}님 합격입니다!")
-
-
-
