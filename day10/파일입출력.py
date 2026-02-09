@@ -59,4 +59,3 @@ file = open("./example.txt", "a", encoding="utf-8")
 # \n : 엔터
 file.write("\n덮어씌워 지나요2222?")
 file.close()
-
