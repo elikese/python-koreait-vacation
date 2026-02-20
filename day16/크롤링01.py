@@ -15,7 +15,6 @@ html = BeautifulSoup(response.text, "html.parser")
 
 # html태그 안에 div태그이면서 클래스속성값이 quote인 태그
 first_quote_tag = html.find("div", class_="quote")
-print(first_quote_tag.text)
 
 # first_quote_tag안에 span태그이면서, 클래스속성값이 text인 태그
 quote_text_tag = first_quote_tag.find("span", class_="text")
