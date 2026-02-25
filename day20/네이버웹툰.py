@@ -99,4 +99,44 @@ for menu in menus:
     webtoon_list.append(webtoon_dict)
 
 driver.quit()
+#### 크롤링 완료 ####
 
+#### 엑셀 저장 ####
+from openpyxl import Workbook
+
+# 엑셀파일 생성
+wb = Workbook()
+
+for webtoon_dict in webtoon_list:
+    # 요일
+    day_of_week = webtoon_dict["day_of_week"]
+    # 해당요일 웹툰들
+    items = webtoon_dict["webtoon_items"]
+
+    # 해당요일 시트생성
+    new_ws = wb.create_sheet(f"{day_of_week}요일")
+
+    # 헤더 추가
+    new_ws.append(["제목", "작가", "평점", "썸네일URL"])
+
+    for item in items:
+        title = item["title"]
+        author = item["author"]
+        rating = item["rating"]
+        img_url = item["img_url"]
+
+        line = [title, author, rating, img_url]
+        new_ws.append(line)
+
+    print(f"{len(items)}개 작성하였습니다")
+    print(f"{day_of_week}요일 엑셀 작업 완료")
+
+
+# 파일명
+from datetime import datetime # 시계모듈
+# 현재시간을 문자열로 가져옴
+now = datetime.now().strftime("%Y%m%d_%H%M%S")
+filename = f"네이버웹툰크롤링_{now}.xlsx"
+wb.save(f"./{filename}")
+
+print("엑셀 파일 저장완료!")
